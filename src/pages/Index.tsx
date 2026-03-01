@@ -1,399 +1,373 @@
-import { useEffect, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
+const LOGO = "https://i0.wp.com/xn----7sbowmcjv.xn--p1ai/wp-content/uploads/2024/05/1715314645453.jpg?fit=1024%2C1024&ssl=1";
+const IMG_HERO = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/files/4365fb78-e5d0-49a1-98c2-7c3ccde61bba.jpg";
+const IMG_KIDS = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/files/824f06b1-df42-4e46-b752-2e4a229094f3.jpg";
+const IMG_GENDER = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/files/5f8d656d-f0d9-46d9-9586-7bb3dfcb4019.jpg";
+const IMG_CANNON = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/files/01d72cf1-6c4d-46eb-9eea-4dbb29233ca4.jpg";
+
+const services = [
+  {
+    title: "ПЕННАЯ ПУШКА",
+    subtitle: "Классическое пенное шоу",
+    desc: "Есть повод зажечь не по-детски? Нашли место, позвали друзей, но не хватает крутой пены? Классическое пенное шоу и ничего лишнего!",
+    icon: "Sparkles",
+    img: IMG_CANNON,
+    color: "from-cyan-500/20 to-blue-500/20",
+    border: "border-cyan-500/30",
+  },
+  {
+    title: "ДЕТСКИЙ ДЕНЬ РОЖДЕНИЯ",
+    subtitle: "Программа на 60 минут",
+    desc: "Всё так же зажигаем не по-детски, но уже с детьми! Пенное шоу, аниматор и музыкальное сопровождение. Заказать легко!",
+    icon: "PartyPopper",
+    img: IMG_KIDS,
+    color: "from-pink-500/20 to-purple-500/20",
+    border: "border-pink-500/30",
+  },
+  {
+    title: "ГЕНДЕР-ПАТИ",
+    subtitle: "Раскрой интригу с цветной пеной",
+    desc: "Ищете оригинальный способ узнать пол ребёнка? Вы даёте бумажку с УЗИ, а мы запускаем ГОЛУБУЮ или РОЗОВУЮ пену — такого ваши гости ещё не видели!",
+    icon: "Heart",
+    img: IMG_GENDER,
+    color: "from-rose-500/20 to-pink-500/20",
+    border: "border-rose-500/30",
+  },
+];
+
+const faqs = [
+  {
+    q: "Безопасно ли это?",
+    a: "Наши пушки имеют несколько степеней защиты. Пена, как и вода, проводник электричества — поэтому безопасность стоит на первом месте.",
+  },
+  {
+    q: "Какой концентрат вы используете?",
+    a: "Только проверенный пенный концентрат, разработанный специально для пенных пушек. Закупаем на заводе напрямую у производителя — никаких подделок.",
+  },
+  {
+    q: "Что будет с газоном?",
+    a: "Наша пена не взаимодействует с растениями — цветами, деревьями, травой. После мероприятия остатки растворятся без следа.",
+  },
+  {
+    q: "Как одеться на пенную вечеринку?",
+    a: "Лёгкая одежда или купальник. Если лёгкая одежда вымокнет, после высыхания на ней не останется следов.",
+  },
+  {
+    q: "Сколько времени работает пушка?",
+    a: "Минимум — 15 минут, это 250 литров пенного раствора. Количество можно увеличивать сколько угодно. При большом числе гостей можно подключить две пушки.",
+  },
+];
+
 const Index = () => {
-  const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
-
-  useEffect(() => {
-    const observers: Record<string, IntersectionObserver> = {};
-
-    const sectionIds = ["hero", "features", "how", "pricing", "cta"];
-
-    sectionIds.forEach((id) => {
-      const element = document.getElementById(id);
-      if (!element) return;
-
-      observers[id] = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setVisibleSections((prev) => ({ ...prev, [id]: true }));
-            observers[id].unobserve(element);
-          }
-        },
-        { threshold: 0.15 }
-      );
-
-      observers[id].observe(element);
-    });
-
-    return () => {
-      Object.values(observers).forEach((observer) => observer.disconnect());
-    };
-  }, []);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+
       {/* Header */}
-      <header className="fixed top-0 w-full bg-background/80 backdrop-blur-2xl border-b border-accent/20 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <Icon name="Globe" size={22} className="text-accent" />
-            <div className="font-display font-bold text-2xl tracking-tighter bg-gradient-to-r from-white via-accent to-accent/80 bg-clip-text text-transparent">
-              WP Pro
-            </div>
+      <header className="fixed top-0 w-full bg-background/80 backdrop-blur-xl border-b border-white/10 z-50">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <img src={LOGO} alt="Пенная пушка" className="w-10 h-10 rounded-full object-cover" />
+            <span className="font-display text-xl font-black tracking-tight text-white">
+              ПЕНА-<span className="text-accent">НСК</span>
+            </span>
           </div>
-          <nav className="hidden md:flex gap-10 text-sm font-medium">
-            <a href="#features" className="text-muted-foreground hover:text-white transition-colors">
-              Возможности
-            </a>
-            <a href="#how" className="text-muted-foreground hover:text-white transition-colors">
-              Как это работает
-            </a>
-            <a href="#pricing" className="text-muted-foreground hover:text-white transition-colors">
-              Тарифы
-            </a>
+          <nav className="hidden md:flex gap-8 text-sm font-medium">
+            <a href="#services" className="text-white/60 hover:text-white transition-colors">Услуги</a>
+            <a href="#about" className="text-white/60 hover:text-white transition-colors">О нас</a>
+            <a href="#faq" className="text-white/60 hover:text-white transition-colors">FAQ</a>
+            <a href="#contacts" className="text-white/60 hover:text-white transition-colors">Контакты</a>
           </nav>
-          <div className="flex gap-3">
-            <button className="px-5 py-2.5 text-sm font-medium border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all">
-              Войти
-            </button>
-            <button className="px-5 py-2.5 text-sm font-medium bg-gradient-to-r from-accent via-accent to-accent/80 text-black rounded-full hover:shadow-lg hover:shadow-accent/40 transition-all font-semibold">
-              Попробовать
-            </button>
-          </div>
+          <a
+            href="tel:+79537755111"
+            className="hidden md:flex px-5 py-2.5 bg-accent text-black font-semibold text-sm rounded-full hover:shadow-lg hover:shadow-accent/40 transition-all"
+          >
+            +7-953-775-51-11
+          </a>
+          <button
+            className="md:hidden text-white"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <Icon name={menuOpen ? "X" : "Menu"} size={24} />
+          </button>
         </div>
+        {menuOpen && (
+          <div className="md:hidden bg-background/95 backdrop-blur-xl border-t border-white/10 px-6 py-4 flex flex-col gap-4">
+            <a href="#services" className="text-white/70 hover:text-white" onClick={() => setMenuOpen(false)}>Услуги</a>
+            <a href="#about" className="text-white/70 hover:text-white" onClick={() => setMenuOpen(false)}>О нас</a>
+            <a href="#faq" className="text-white/70 hover:text-white" onClick={() => setMenuOpen(false)}>FAQ</a>
+            <a href="#contacts" className="text-white/70 hover:text-white" onClick={() => setMenuOpen(false)}>Контакты</a>
+            <a href="tel:+79537755111" className="text-accent font-bold">+7-953-775-51-11</a>
+          </div>
+        )}
       </header>
 
-      {/* Hero Section */}
-      <section id="hero" className="relative pt-32 pb-32 px-6 min-h-screen flex items-center overflow-hidden">
-        <div className="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden">
-          <img src="/images/black-hole-gif.gif" alt="Background animation" className="w-auto h-3/4 object-contain" />
+      {/* Hero */}
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-16">
+        <div className="absolute inset-0">
+          <img src={IMG_HERO} alt="Пенная вечеринка" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
         </div>
-        <div className="absolute inset-0 bg-black/70" />
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div
-              className={`transition-all duration-1000 ${visibleSections["hero"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-            >
-              <div className="mb-8 inline-block">
-                <span className="text-xs font-medium tracking-widest text-accent/80 uppercase">
-                  Профессиональный сервис WordPress
-                </span>
-              </div>
-              <h1 className="text-6xl lg:text-7xl font-display font-black leading-tight mb-8 tracking-tighter">
-                <span className="bg-gradient-to-br from-white via-white to-accent/40 bg-clip-text text-transparent">
-                  Сайт на WordPress.
-                </span>
-                <br />
-                <span className="text-accent">Быстро и надёжно.</span>
-              </h1>
-              <p className="text-xl text-white/80 leading-relaxed mb-10 max-w-xl font-light">
-                Создаём, настраиваем и сопровождаем WordPress-сайты под ключ.
-                Вы занимаетесь бизнесом — мы берём технику на себя.
-              </p>
-              <div className="flex gap-4 mb-12 flex-col sm:flex-row">
-                <button className="group px-8 py-4 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full hover:shadow-2xl hover:shadow-accent/50 transition-all font-semibold text-lg flex items-center gap-3 justify-center">
-                  Заказать сайт
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition" />
-                </button>
-                <button className="px-8 py-4 border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all font-medium text-lg text-white">
-                  Посмотреть портфолио
-                </button>
-              </div>
-              <div className="grid grid-cols-3 gap-8 pt-8 border-t border-white/10">
-                <div>
-                  <div className="text-2xl font-bold text-accent mb-2">500+</div>
-                  <p className="text-sm text-white/60">Готовых проектов</p>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-white mb-2">7 лет</div>
-                  <p className="text-sm text-white/60">На рынке</p>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-accent mb-2">99.9%</div>
-                  <p className="text-sm text-white/60">Аптайм сайтов</p>
-                </div>
-              </div>
+        <div className="relative z-10 max-w-6xl mx-auto px-6 py-24">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-4 py-2 mb-8">
+              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+              <span className="text-accent text-sm font-medium">Новосибирск · Ежедневно 09:00–23:00</span>
             </div>
-
-            <div
-              className={`relative h-96 lg:h-[550px] transition-all duration-1000 flex items-center justify-center ${visibleSections["hero"] ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/30 via-transparent to-transparent rounded-3xl blur-3xl animate-pulse" />
-              <div className="relative z-10 w-full max-w-sm lg:max-w-md">
-                <div className="bg-card/80 border border-accent/20 rounded-2xl p-6 backdrop-blur-sm shadow-2xl">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                    <span className="ml-2 text-xs text-muted-foreground">wordpress-site.ru</span>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="h-6 bg-accent/20 rounded-lg w-3/4"></div>
-                    <div className="h-4 bg-white/10 rounded w-full"></div>
-                    <div className="h-4 bg-white/10 rounded w-5/6"></div>
-                    <div className="h-4 bg-white/10 rounded w-4/6"></div>
-                    <div className="mt-4 grid grid-cols-2 gap-2">
-                      <div className="h-20 bg-accent/10 border border-accent/20 rounded-lg"></div>
-                      <div className="h-20 bg-accent/10 border border-accent/20 rounded-lg"></div>
-                    </div>
-                    <div className="h-10 bg-gradient-to-r from-accent/80 to-accent/60 rounded-lg flex items-center justify-center">
-                      <span className="text-xs font-semibold text-black">Ваш сайт готов ✓</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <h1 className="text-6xl lg:text-8xl font-display font-black leading-none mb-6 tracking-tighter">
+              <span className="text-white">ПЕННАЯ</span>
+              <br />
+              <span className="text-accent">ВЕЧЕРИНКА</span>
+            </h1>
+            <p className="text-xl text-white/80 leading-relaxed mb-10 max-w-lg">
+              Пенное шоу, которое взорвёт твой праздник. Для взрослых, детей и гендер-пати в Новосибирске.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href="tel:+79537755111"
+                className="group flex items-center justify-center gap-3 px-8 py-4 bg-accent text-black font-bold text-lg rounded-full hover:shadow-2xl hover:shadow-accent/50 transition-all"
+              >
+                <Icon name="Phone" size={20} />
+                Позвонить
+              </a>
+              <a
+                href="#services"
+                className="flex items-center justify-center gap-3 px-8 py-4 border border-white/30 text-white font-semibold text-lg rounded-full hover:border-white/60 hover:bg-white/10 transition-all"
+              >
+                Смотреть услуги
+                <Icon name="ArrowDown" size={20} />
+              </a>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-32 px-6 bg-accent/5">
-        <div className="max-w-7xl mx-auto">
-          <div
-            className={`text-center mb-20 transition-all duration-1000 ${visibleSections["features"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-          >
-            <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Возможности</span>
-            <h2 className="text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4 mb-6">
-              <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
-                Всё для вашего сайта
-              </span>
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                icon: "Zap",
-                title: "Быстрый запуск",
-                desc: "Сайт под ключ за 3–7 дней. Никаких задержек и лишних согласований.",
-              },
-              {
-                icon: "Palette",
-                title: "Уникальный дизайн",
-                desc: "Разрабатываем дизайн под ваш бренд — не шаблоны с базаров.",
-              },
-              {
-                icon: "TrendingUp",
-                title: "SEO с нуля",
-                desc: "Сайт оптимизирован для поисковиков с первого дня — трафик растёт сам.",
-              },
-              {
-                icon: "Shield",
-                title: "Защита и безопасность",
-                desc: "SSL-сертификат, защита от взломов и регулярные обновления плагинов.",
-              },
-              {
-                icon: "Settings",
-                title: "Простое управление",
-                desc: "WordPress — самая удобная CMS. Редактируйте контент без программиста.",
-              },
-              {
-                icon: "Headphones",
-                title: "Поддержка 24/7",
-                desc: "Всегда на связи. Помогаем с любыми вопросами по сайту и хостингу.",
-              },
-            ].map((item, i) => {
-              const isVisible = visibleSections["features"];
-              return (
-                <div
-                  key={i}
-                  className={`group p-8 border border-accent/10 hover:border-accent/40 rounded-2xl bg-card/50 hover:bg-card/80 transition-all duration-700 ${
-                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                  }`}
-                  style={{ transitionDelay: `${i * 100}ms` }}
-                >
-                  <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center mb-5 group-hover:bg-accent/20 group-hover:border-accent/40 transition-all">
-                    <Icon name={item.icon} size={22} className="text-accent" fallback="Star" />
-                  </div>
-                  <h3 className="font-display font-bold text-lg mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              );
-            })}
-          </div>
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 animate-bounce">
+          <Icon name="ChevronDown" size={28} />
         </div>
       </section>
 
-      {/* How It Works */}
-      <section id="how" className="py-32 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div
-            className={`text-center mb-20 transition-all duration-1000 ${visibleSections["how"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-          >
-            <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Процесс</span>
-            <h2 className="text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4">
-              <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
-                Как мы работаем
-              </span>
+      {/* Services */}
+      <section id="services" className="py-24 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="text-accent text-sm font-medium tracking-widest uppercase">Что мы предлагаем</span>
+            <h2 className="text-5xl lg:text-6xl font-display font-black mt-3 tracking-tighter">
+              Наши <span className="text-accent">услуги</span>
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              { num: "01", title: "Бриф", desc: "Обсуждаем цели, целевую аудиторию и пожелания по дизайну" },
-              { num: "02", title: "Дизайн", desc: "Разрабатываем макет и согласуем внешний вид сайта с вами" },
-              { num: "03", title: "Разработка", desc: "Верстаем и настраиваем WordPress с нужными плагинами" },
-              { num: "04", title: "Запуск", desc: "Публикуем сайт, настраиваем хостинг и передаём управление" },
-            ].map((step, i) => {
-              const isVisible = visibleSections["how"];
-              return (
-                <div
-                  key={i}
-                  className={`relative transition-all duration-700 ${
-                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                  }`}
-                  style={{ transitionDelay: `${i * 150}ms` }}
-                >
-                  <div className="group bg-accent/10 hover:bg-accent/20 border border-accent/20 hover:border-accent/40 rounded-2xl p-8 h-full flex flex-col justify-between transition-all backdrop-blur-sm cursor-pointer">
-                    <div>
-                      <div className="text-5xl font-display font-black text-accent mb-4 group-hover:scale-110 transition-transform">
-                        {step.num}
-                      </div>
-                      <h3 className="font-display font-bold text-xl mb-2">{step.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{step.desc}</p>
+          <div className="grid md:grid-cols-3 gap-8">
+            {services.map((s, i) => (
+              <div
+                key={i}
+                className={`relative rounded-3xl overflow-hidden border ${s.border} bg-gradient-to-br ${s.color} backdrop-blur-sm group hover:-translate-y-2 transition-all duration-300`}
+              >
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={s.img}
+                    alt={s.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-accent/20 border border-accent/30 flex items-center justify-center">
+                      <Icon name={s.icon} size={18} className="text-accent" />
                     </div>
+                    <span className="text-xs text-white/50 font-medium">{s.subtitle}</span>
                   </div>
-                  {i < 3 && (
-                    <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-accent/40 to-transparent" />
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section id="pricing" className="py-32 px-6 bg-accent/5">
-        <div className="max-w-5xl mx-auto">
-          <div
-            className={`text-center mb-20 transition-all duration-1000 ${visibleSections["pricing"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-          >
-            <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Тарифы</span>
-            <h2 className="text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4">
-              <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
-                Прозрачные цены
-              </span>
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {[
-              {
-                name: "Сайт под ключ",
-                price: "от 29 900 ₽",
-                features: [
-                  "До 10 страниц",
-                  "Уникальный дизайн",
-                  "SEO-оптимизация",
-                  "Мобильная версия",
-                  "Обучение CMS",
-                ],
-                highlight: false,
-              },
-              {
-                name: "Поддержка и развитие",
-                price: "от 9 900 ₽/мес",
-                features: [
-                  "Обновления и безопасность",
-                  "Добавление страниц",
-                  "Технический мониторинг",
-                  "Резервные копии",
-                  "Приоритетная поддержка 24/7",
-                ],
-                highlight: true,
-              },
-            ].map((plan, i) => {
-              const isVisible = visibleSections["pricing"];
-              return (
-                <div
-                  key={i}
-                  className={`group relative transition-all duration-700 ${
-                    isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-                  } ${plan.highlight ? "md:scale-105" : ""}`}
-                  style={{ transitionDelay: `${i * 200}ms` }}
-                >
-                  {plan.highlight && (
-                    <div className="absolute -inset-1 bg-gradient-to-r from-accent via-accent to-accent/60 rounded-3xl opacity-20 blur-xl group-hover:opacity-30 transition" />
-                  )}
-                  <div
-                    className={`relative p-10 border rounded-2xl h-full flex flex-col justify-between backdrop-blur-sm transition-all ${
-                      plan.highlight ? "border-accent/40 bg-accent/10" : "border-accent/10 bg-card/50 hover:bg-card/80"
-                    }`}
+                  <h3 className="text-xl font-display font-black mb-3 text-white">{s.title}</h3>
+                  <p className="text-white/70 text-sm leading-relaxed">{s.desc}</p>
+                  <a
+                    href="tel:+79537755111"
+                    className="mt-5 w-full flex items-center justify-center gap-2 py-3 bg-accent/20 hover:bg-accent hover:text-black border border-accent/40 text-accent font-semibold text-sm rounded-xl transition-all"
                   >
-                    <div>
-                      <h3 className="font-display font-bold text-2xl mb-2">{plan.name}</h3>
-                      <p className="text-4xl font-black text-accent mb-8">{plan.price}</p>
-                      <ul className="space-y-4 mb-10">
-                        {plan.features.map((f, j) => (
-                          <li key={j} className="flex gap-3 text-sm items-start">
-                            <ArrowRight className="w-4 h-4 text-accent flex-shrink-0 mt-1" />
-                            <span className="text-foreground/80">{f}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <button
-                      className={`w-full px-6 py-4 rounded-xl font-semibold transition-all ${
-                        plan.highlight
-                          ? "bg-gradient-to-r from-accent to-accent/80 text-black hover:shadow-xl hover:shadow-accent/40"
-                          : "border border-accent/20 hover:border-accent/40 hover:bg-accent/5"
-                      }`}
-                    >
-                      {plan.highlight ? "Подключить поддержку" : "Заказать сайт"}
-                    </button>
-                  </div>
+                    Заказать
+                    <Icon name="ArrowRight" size={16} />
+                  </a>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section id="cta" className="py-32 px-6">
-        <div
-          className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${visibleSections["cta"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-        >
-          <h2 className="text-5xl lg:text-6xl font-display font-black tracking-tighter mb-6">
-            <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
-              Готовы запустить сайт?
-            </span>
-          </h2>
-          <p className="text-xl text-muted-foreground mb-12 font-light max-w-2xl mx-auto">
-            Оставьте заявку — обсудим ваш проект и рассчитаем стоимость бесплатно.
-          </p>
-          <button className="group px-10 py-5 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full hover:shadow-2xl hover:shadow-accent/40 transition-all font-bold text-lg flex items-center gap-3 mx-auto">
-            Получить консультацию
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition" />
-          </button>
+      {/* About / How it works */}
+      <section id="about" className="py-24 px-6 bg-white/5">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <span className="text-accent text-sm font-medium tracking-widest uppercase">Заказ пенной пушки</span>
+              <h2 className="text-5xl font-display font-black mt-3 mb-6 tracking-tighter">
+                Дополним ваш праздник <span className="text-accent">фееричным финалом!</span>
+              </h2>
+              <p className="text-white/70 text-lg leading-relaxed mb-8">
+                Пушка работает столько, сколько нужно вам. Минимально — 15 минут, это 250 литров пенного раствора.
+                При большом числе гостей, как на фестивале, можно применить две большие пушки — наполнение пеной будет быстрее и эффектнее.
+              </p>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { icon: "Clock", label: "Работаем ежедневно", val: "09:00 – 23:00" },
+                  { icon: "Droplets", label: "Минимум пены", val: "250 литров" },
+                  { icon: "Users", label: "Для любых событий", val: "Любой масштаб" },
+                  { icon: "ShieldCheck", label: "Безопасность", val: "Несколько степеней защиты" },
+                ].map((item, i) => (
+                  <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-4">
+                    <Icon name={item.icon} size={20} className="text-accent mb-2" />
+                    <div className="text-xs text-white/50 mb-1">{item.label}</div>
+                    <div className="text-sm font-semibold text-white">{item.val}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="relative">
+              <div className="absolute -inset-4 bg-accent/10 rounded-3xl blur-3xl" />
+              <img
+                src={IMG_HERO}
+                alt="Пенная пушка"
+                className="relative rounded-3xl w-full object-cover shadow-2xl"
+              />
+              <div className="absolute -bottom-4 -right-4 bg-accent text-black font-black text-2xl rounded-2xl px-6 py-4 shadow-xl">
+                🎉 Зажги<br />с нами!
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="py-24 px-6">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="text-accent text-sm font-medium tracking-widest uppercase">Частые вопросы</span>
+            <h2 className="text-5xl font-display font-black mt-3 tracking-tighter">
+              FAQ
+            </h2>
+          </div>
+          <div className="space-y-3">
+            {faqs.map((faq, i) => (
+              <div
+                key={i}
+                className="border border-white/10 rounded-2xl overflow-hidden bg-white/5"
+              >
+                <button
+                  className="w-full flex justify-between items-center px-6 py-5 text-left hover:bg-white/5 transition-colors"
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                >
+                  <span className="font-semibold text-white pr-4">{faq.q}</span>
+                  <Icon
+                    name={openFaq === i ? "ChevronUp" : "ChevronDown"}
+                    size={20}
+                    className="text-accent flex-shrink-0"
+                  />
+                </button>
+                {openFaq === i && (
+                  <div className="px-6 pb-5 text-white/70 leading-relaxed border-t border-white/10 pt-4">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Banner */}
+      <section className="py-16 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="relative rounded-3xl overflow-hidden">
+            <img src={IMG_CANNON} alt="CTA" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+            <div className="relative z-10 p-12 text-center">
+              <h2 className="text-4xl lg:text-5xl font-display font-black mb-4 tracking-tighter text-white">
+                Готовы устроить <span className="text-accent">пенный взрыв</span>?
+              </h2>
+              <p className="text-white/70 text-lg mb-8">
+                Звоните — обсудим ваш праздник и подберём оптимальный формат
+              </p>
+              <a
+                href="tel:+79537755111"
+                className="inline-flex items-center gap-3 px-10 py-5 bg-accent text-black font-bold text-xl rounded-full hover:shadow-2xl hover:shadow-accent/50 transition-all"
+              >
+                <Icon name="Phone" size={22} />
+                +7-953-775-51-11
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contacts */}
+      <section id="contacts" className="py-24 px-6 bg-white/5">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="text-accent text-sm font-medium tracking-widest uppercase">Как с нами связаться</span>
+            <h2 className="text-5xl font-display font-black mt-3 tracking-tighter">
+              Контакты
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 text-center hover:border-accent/40 transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-accent/20 border border-accent/30 flex items-center justify-center mx-auto mb-4">
+                <Icon name="Phone" size={24} className="text-accent" />
+              </div>
+              <div className="text-white/50 text-sm mb-2">Телефон</div>
+              <a href="tel:+79537755111" className="text-xl font-bold text-white hover:text-accent transition-colors">
+                +7-953-775-51-11
+              </a>
+            </div>
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 text-center hover:border-accent/40 transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-accent/20 border border-accent/30 flex items-center justify-center mx-auto mb-4">
+                <Icon name="Mail" size={24} className="text-accent" />
+              </div>
+              <div className="text-white/50 text-sm mb-2">Email</div>
+              <a href="mailto:suhininvyacheslav@gmail.com" className="text-base font-semibold text-white hover:text-accent transition-colors break-all">
+                suhininvyacheslav@gmail.com
+              </a>
+            </div>
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 text-center hover:border-accent/40 transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-accent/20 border border-accent/30 flex items-center justify-center mx-auto mb-4">
+                <Icon name="Clock" size={24} className="text-accent" />
+              </div>
+              <div className="text-white/50 text-sm mb-2">Часы работы</div>
+              <div className="text-xl font-bold text-white">Ежедневно</div>
+              <div className="text-accent font-semibold">09:00 – 23:00</div>
+            </div>
+          </div>
+
+          <div className="mt-8 bg-white/5 border border-white/10 rounded-3xl p-8 text-center">
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <Icon name="MapPin" size={20} className="text-accent" />
+              <span className="text-white/50 text-sm">Адрес</span>
+            </div>
+            <div className="text-lg font-semibold text-white">Россия, Новосибирская область, г. Новосибирск</div>
+            <div className="mt-4 text-white/40 text-sm">ИП Сухинина Т.С. · ИНН 541000739716</div>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-accent/10 py-12 px-6 bg-background/50">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-muted-foreground">
-          <p>© 2026 WP Pro — Профессиональные сайты на WordPress</p>
-          <div className="flex gap-8">
-            <a href="#" className="hover:text-white transition-colors">
-              Конфиденциальность
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Условия
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Портфолио
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Контакты
-            </a>
+      <footer className="border-t border-white/10 py-8 px-6">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex items-center gap-3">
+            <img src={LOGO} alt="Пена-НСК" className="w-8 h-8 rounded-full object-cover" />
+            <span className="font-display font-bold text-white">ПЕНА-<span className="text-accent">НСК</span></span>
           </div>
+          <div className="text-white/40 text-sm text-center">
+            © 2024 ИП Сухинина Т.С. · Пенные вечеринки в Новосибирске
+          </div>
+          <a href="tel:+79537755111" className="text-accent font-semibold hover:text-white transition-colors">
+            +7-953-775-51-11
+          </a>
         </div>
       </footer>
+
     </div>
   );
 };
