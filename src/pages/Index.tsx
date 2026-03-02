@@ -3,9 +3,10 @@ import Icon from "@/components/ui/icon";
 
 const LOGO = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/4cc29c86-b060-4bb9-a2ff-219b9674aae7.png";
 const IMG_HERO = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/files/4365fb78-e5d0-49a1-98c2-7c3ccde61bba.jpg";
-const IMG_KIDS = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/files/824f06b1-df42-4e46-b752-2e4a229094f3.jpg";
-const IMG_GENDER = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/files/5f8d656d-f0d9-46d9-9586-7bb3dfcb4019.jpg";
-const IMG_CANNON = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/files/01d72cf1-6c4d-46eb-9eea-4dbb29233ca4.jpg";
+const IMG_KIDS = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/bd25b997-0ba5-4f38-a88f-b5f860ce7a90.jpg";
+const IMG_GENDER = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/11e4363c-778b-40a6-a152-0f55e4ffaa4a.jpg";
+const IMG_CANNON = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/c3a0b934-ca58-40f5-98e3-b8ef8a478a2e.jpg";
+const IMG_ABOUT = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/b8c025cf-dcdf-4ed9-b97b-fbe38bfd78e5.jpg";
 
 const services = [
   {
@@ -229,7 +230,7 @@ const Index = () => {
             <div className="relative">
               <div className="absolute -inset-4 bg-accent/10 rounded-3xl blur-3xl" />
               <img
-                src={IMG_HERO}
+                src={IMG_ABOUT}
                 alt="Пенная пушка"
                 className="relative rounded-3xl w-full object-cover shadow-2xl"
               />
