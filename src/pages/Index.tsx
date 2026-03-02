@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Icon from "@/components/ui/icon";
 
 const LOGO = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/4cc29c86-b060-4bb9-a2ff-219b9674aae7.png";
@@ -7,6 +7,111 @@ const IMG_KIDS = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311
 const IMG_GENDER = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/11e4363c-778b-40a6-a152-0f55e4ffaa4a.jpg";
 const IMG_CANNON = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/c3a0b934-ca58-40f5-98e3-b8ef8a478a2e.jpg";
 const IMG_ABOUT = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/b8c025cf-dcdf-4ed9-b97b-fbe38bfd78e5.jpg";
+
+const GALLERY_PHOTOS = [
+  "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/3bb84ed0-a018-43df-a065-a236ffd1484f.jpg",
+  "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/21216610-8e4b-4479-94b9-98169f09065a.jpg",
+  "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/47c5acee-aecd-4184-8f35-bd5a9a01651d.jpg",
+  "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/f3bd8942-b035-4f6d-b0f7-e0baf735cb38.jpg",
+  "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/270d2163-f345-4080-9c0c-bc9f32526506.jpg",
+];
+
+const GallerySection = () => {
+  const [lightbox, setLightbox] = useState<number | null>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const repeated = [...GALLERY_PHOTOS, ...GALLERY_PHOTOS, ...GALLERY_PHOTOS];
+
+  useEffect(() => {
+    if (lightbox === null) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+      if (e.key === "ArrowRight") setLightbox((p) => p !== null ? (p + 1) % GALLERY_PHOTOS.length : null);
+      if (e.key === "ArrowLeft") setLightbox((p) => p !== null ? (p - 1 + GALLERY_PHOTOS.length) % GALLERY_PHOTOS.length : null);
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [lightbox]);
+
+  return (
+    <section className="py-24 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-6 text-center mb-12">
+        <span className="text-accent text-sm font-medium tracking-widest uppercase">Наши мероприятия</span>
+        <h2 className="text-5xl font-display font-black mt-3 tracking-tighter">
+          Галерея
+        </h2>
+      </div>
+
+      {/* Бесконечная лента */}
+      <div className="relative w-full overflow-hidden">
+        <div
+          ref={trackRef}
+          className="flex gap-4 w-max"
+          style={{ animation: "gallery-scroll 30s linear infinite" }}
+          onMouseEnter={() => { if (trackRef.current) trackRef.current.style.animationPlayState = "paused"; }}
+          onMouseLeave={() => { if (trackRef.current) trackRef.current.style.animationPlayState = "running"; }}
+        >
+          {repeated.map((src, i) => (
+            <div
+              key={i}
+              className="w-72 h-52 flex-shrink-0 rounded-2xl overflow-hidden cursor-pointer group relative"
+              onClick={() => setLightbox(i % GALLERY_PHOTOS.length)}
+            >
+              <img
+                src={src}
+                alt=""
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                <Icon name="ZoomIn" size={32} className="text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Lightbox */}
+      {lightbox !== null && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white/70 hover:text-white"
+            onClick={() => setLightbox(null)}
+          >
+            <Icon name="X" size={32} />
+          </button>
+          <button
+            className="absolute left-4 text-white/70 hover:text-white"
+            onClick={(e) => { e.stopPropagation(); setLightbox((lightbox - 1 + GALLERY_PHOTOS.length) % GALLERY_PHOTOS.length); }}
+          >
+            <Icon name="ChevronLeft" size={40} />
+          </button>
+          <img
+            src={GALLERY_PHOTOS[lightbox]}
+            alt=""
+            className="max-h-[85vh] max-w-[90vw] rounded-2xl object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button
+            className="absolute right-4 text-white/70 hover:text-white"
+            onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % GALLERY_PHOTOS.length); }}
+          >
+            <Icon name="ChevronRight" size={40} />
+          </button>
+          <div className="absolute bottom-4 text-white/50 text-sm">{lightbox + 1} / {GALLERY_PHOTOS.length}</div>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes gallery-scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(calc(-${GALLERY_PHOTOS.length} * (18rem + 1rem))); }
+        }
+      `}</style>
+    </section>
+  );
+};
 
 const services = [
   {
@@ -152,6 +257,9 @@ const Index = () => {
           <Icon name="ChevronDown" size={28} />
         </div>
       </section>
+
+      {/* Gallery */}
+      <GallerySection />
 
       {/* Services */}
       <section id="services" className="py-24 px-6">
