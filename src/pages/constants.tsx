@@ -46,13 +46,15 @@ export const SOCIALS = [
     ),
   },
   {
-    label: "Maxx",
-    href: "https://maxx.ru/djrenown",
-    color: "#FF4D00",
+    label: "MAX",
+    href: "https://max.ru/u/f9LHodD0cOJ3pzYhs7NHd4xktdWLKaLaF7UTjnu-eHVEjIpgTOn_VpjNpXM",
+    color: "#6C5CE7",
     icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
-      </svg>
+      <img
+        src="https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/2259c7e6-1919-4506-a600-dcfd29d78db4.png"
+        alt="MAX"
+        className="w-5 h-5 rounded object-cover"
+      />
     ),
   },
 ];

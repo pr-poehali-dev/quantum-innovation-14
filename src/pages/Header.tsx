@@ -55,6 +55,21 @@ const Header = () => {
           <a href="#faq" className="text-white/70 hover:text-white" onClick={() => setMenuOpen(false)}>FAQ</a>
           <a href="#contacts" className="text-white/70 hover:text-white" onClick={() => setMenuOpen(false)}>Контакты</a>
           <a href="tel:+79537755111" className="text-accent font-bold">+7-953-775-51-11</a>
+          <div className="flex items-center gap-3 pt-1">
+            {SOCIALS.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={s.label}
+                className="w-10 h-10 rounded-xl flex items-center justify-center border border-white/10 hover:border-white/30 transition-all"
+                style={{ color: s.color }}
+              >
+                {s.icon}
+              </a>
+            ))}
+          </div>
         </div>
       )}
     </header>
