@@ -51,7 +51,7 @@ export const SOCIALS = [
     color: "#6C5CE7",
     icon: (
       <img
-        src="https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/2259c7e6-1919-4506-a600-dcfd29d78db4.png"
+        src="https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/e237a7ed-ff94-482e-abd9-07570386dba3.png"
         alt="MAX"
         className="w-5 h-5 rounded object-cover"
       />
