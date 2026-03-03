@@ -8,6 +8,21 @@ const IMG_GENDER = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d3
 const IMG_CANNON = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/c3a0b934-ca58-40f5-98e3-b8ef8a478a2e.jpg";
 const IMG_ABOUT = "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/b8c025cf-dcdf-4ed9-b97b-fbe38bfd78e5.jpg";
 
+const SOCIALS = [
+  { label: "WhatsApp", href: "https://wa.me/79537755111", color: "#25D366", icon: (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.882a.5.5 0 0 0 .614.614l6.037-1.471A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.933 0-3.742-.524-5.29-1.438l-.379-.224-3.932.958.975-3.932-.232-.385A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  )},
+  { label: "Telegram", href: "https://t.me/Pena_nsk", color: "#2AABEE", icon: (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+  )},
+  { label: "VK", href: "https://vk.ru/djrenown", color: "#0077FF", icon: (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4.03 8.57 4.03 8.096c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.677.864 2.49 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.254-1.406 2.151-3.574 2.151-3.574.119-.254.322-.491.763-.491h1.744c.525 0 .644.271.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.05.17.491-.085.745-.576.745z"/></svg>
+  )},
+  { label: "Maxx", href: "https://maxx.ru/djrenown", color: "#FF4D00", icon: (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+  )},
+];
+
 const GALLERY_PHOTOS = [
   "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/3bb84ed0-a018-43df-a065-a236ffd1484f.jpg",
   "https://cdn.poehali.dev/projects/286124bd-9c67-48e5-aaae-0d311c22057e/bucket/21216610-8e4b-4479-94b9-98169f09065a.jpg",
@@ -188,6 +203,21 @@ const Index = () => {
             <a href="#faq" className="text-white/60 hover:text-white transition-colors">FAQ</a>
             <a href="#contacts" className="text-white/60 hover:text-white transition-colors">Контакты</a>
           </nav>
+          <div className="hidden md:flex items-center gap-2">
+            {SOCIALS.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={s.label}
+                className="w-9 h-9 rounded-xl flex items-center justify-center border border-white/10 hover:border-white/30 transition-all hover:scale-110"
+                style={{ color: s.color }}
+              >
+                {s.icon}
+              </a>
+            ))}
+          </div>
           <a
             href="tel:+79537755111"
             className="hidden md:flex px-5 py-2.5 bg-accent text-black font-semibold text-sm rounded-full hover:shadow-lg hover:shadow-accent/40 transition-all"
@@ -463,17 +493,29 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="border-t border-white/10 py-8 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
             <img src={LOGO} alt="Пена-НСК" className="w-8 h-8 rounded-full object-cover" />
             <span className="font-display font-bold text-white">ПЕНА-<span className="text-accent">НСК</span></span>
           </div>
           <div className="text-white/40 text-sm text-center">
-            © 2024 ИП Сухинина Т.С. · Пенные вечеринки в Новосибирске
+            © 2025 ИП Сухинина Т.С. · Пенные вечеринки в Новосибирске
           </div>
-          <a href="tel:+79537755111" className="text-accent font-semibold hover:text-white transition-colors">
-            +7-953-775-51-11
-          </a>
+          <div className="flex items-center gap-3">
+            {SOCIALS.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={s.label}
+                className="w-10 h-10 rounded-xl flex items-center justify-center border border-white/10 hover:border-white/30 transition-all hover:scale-110"
+                style={{ color: s.color }}
+              >
+                {s.icon}
+              </a>
+            ))}
+          </div>
         </div>
       </footer>
 
