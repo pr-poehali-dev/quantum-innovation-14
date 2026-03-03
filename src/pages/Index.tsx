@@ -2,6 +2,7 @@ import { useState } from "react";
 import Icon from "@/components/ui/icon";
 import Header from "./Header";
 import GallerySection from "./GallerySection";
+import ReviewsSection from "./ReviewsSection";
 import Footer from "./Footer";
 import { IMG_HERO, IMG_ABOUT, IMG_CANNON, services, faqs } from "./constants";
 
@@ -149,6 +150,8 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <ReviewsSection />
 
       {/* FAQ */}
       <section id="faq" className="py-24 px-6">
