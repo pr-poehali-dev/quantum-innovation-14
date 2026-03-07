@@ -34,10 +34,8 @@ const Index = () => {
               <span className="text-accent text-sm font-medium">Новосибирск · Ежедневно 09:00–23:00</span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-black leading-none mb-6 tracking-tighter">
-              <span className="text-white">ПЕННАЯ</span>
-              <br />
-              <span className="text-accent">ВЕЧЕРИНКА</span>
-              <br />
+              <span className="text-white">ПЕННАЯ </span>
+              <span className="text-accent">ВЕЧЕРИНКА </span>
               <span className="text-white/80">В НОВОСИБИРСКЕ</span>
             </h1>
             <p className="text-xl text-white/80 leading-relaxed mb-10 max-w-lg">
