@@ -2,6 +2,14 @@ import { useState, useEffect, useRef } from "react";
 import Icon from "@/components/ui/icon";
 import { GALLERY_PHOTOS } from "./constants";
 
+const GALLERY_ALTS = [
+  "Пенная вечеринка в Новосибирске — гости веселятся в пене на открытой площадке",
+  "Пенное шоу для детей в Новосибирске — дети играют в пене на дне рождения",
+  "Аренда пенной пушки в Новосибирске — профессиональная установка в действии",
+  "Гендер пати с цветной пеной в Новосибирске — раскрытие пола ребёнка",
+  "Пенная дискотека в Новосибирске — корпоратив с пеной для взрослых",
+];
+
 const GallerySection = () => {
   const [lightbox, setLightbox] = useState<number | null>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -43,7 +51,8 @@ const GallerySection = () => {
             >
               <img
                 src={src}
-                alt=""
+                alt={GALLERY_ALTS[i % GALLERY_PHOTOS.length]}
+                title={GALLERY_ALTS[i % GALLERY_PHOTOS.length]}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
@@ -73,7 +82,8 @@ const GallerySection = () => {
           </button>
           <img
             src={GALLERY_PHOTOS[lightbox]}
-            alt=""
+            alt={GALLERY_ALTS[lightbox]}
+            title={GALLERY_ALTS[lightbox]}
             className="max-h-[85vh] max-w-[90vw] rounded-2xl object-contain"
             onClick={(e) => e.stopPropagation()}
           />

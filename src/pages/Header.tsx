@@ -9,7 +9,7 @@ const Header = () => {
     <header className="fixed top-0 w-full bg-background/80 backdrop-blur-xl border-b border-white/10 z-50">
       <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <img src={LOGO} alt="Пенная пушка" className="w-10 h-10 rounded-full object-cover" />
+          <img src={LOGO} alt="Пенная вечеринка в Новосибирске — логотип Пена-НСК" title="Пена-НСК — пенная вечеринка в Новосибирске" className="w-10 h-10 rounded-full object-cover" />
           <span className="font-display text-xl font-black tracking-tight text-white">
             ПЕНА-<span className="text-accent">НСК</span>
           </span>

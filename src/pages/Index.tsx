@@ -4,7 +4,7 @@ import Header from "./Header";
 import GallerySection from "./GallerySection";
 import ReviewsSection from "./ReviewsSection";
 import Footer from "./Footer";
-import { IMG_HERO, IMG_ABOUT, IMG_CANNON, services, faqs } from "./constants";
+import { IMG_HERO, IMG_ABOUT, services, faqs } from "./constants";
 
 const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -17,7 +17,12 @@ const Index = () => {
       {/* Hero */}
       <section className="relative min-h-screen flex items-center overflow-hidden pt-16">
         <div className="absolute inset-0">
-          <img src={IMG_HERO} alt="Пенная вечеринка" className="w-full h-full object-cover" />
+          <img
+            src={IMG_HERO}
+            alt="Пенная вечеринка в Новосибирске — пенное шоу на открытой площадке"
+            title="Пенная вечеринка в Новосибирске"
+            className="w-full h-full object-cover"
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-background" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
         </div>
@@ -29,9 +34,9 @@ const Index = () => {
               <span className="text-accent text-sm font-medium">Новосибирск · Ежедневно 09:00–23:00</span>
             </div>
             <h1 className="text-6xl lg:text-8xl font-display font-black leading-none mb-6 tracking-tighter">
-              <span className="text-white">ПЕННАЯ</span>
+              <span className="text-white">ПЕННАЯ ВЕЧЕРИНКА</span>
               <br />
-              <span className="text-accent">ВЕЧЕРИНКА</span>
+              <span className="text-accent">В НОВОСИБИРСКЕ</span>
             </h1>
             <p className="text-xl text-white/80 leading-relaxed mb-10 max-w-lg">
               Пенное шоу, которое взорвёт твой праздник. Для взрослых, детей и гендер-пати в Новосибирске.
@@ -81,7 +86,8 @@ const Index = () => {
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
                     src={s.img}
-                    alt={s.title}
+                    alt={s.imgAlt}
+                    title={s.imgTitle}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -92,7 +98,7 @@ const Index = () => {
                     </div>
                     <span className="text-xs text-white/50 font-medium">{s.subtitle}</span>
                   </div>
-                  <h3 className="text-xl font-display font-black mb-3 text-white">{s.title}</h3>
+                  <h2 className="text-xl font-display font-black mb-3 text-white">{s.title}</h2>
                   <p className="text-white/70 text-sm leading-relaxed">{s.desc}</p>
                   <a
                     href="tel:+79537755111"
@@ -140,7 +146,8 @@ const Index = () => {
               <div className="absolute -inset-4 bg-accent/10 rounded-3xl blur-3xl" />
               <img
                 src={IMG_ABOUT}
-                alt="Пенная пушка"
+                alt="Аренда пенной пушки в Новосибирске — профессиональное оборудование для пенного шоу"
+                title="Аренда пенной пушки в Новосибирске"
                 className="relative rounded-3xl w-full object-cover shadow-2xl"
               />
               <div className="absolute -bottom-4 -right-4 bg-accent text-black font-black text-2xl rounded-2xl px-6 py-4 shadow-xl">
@@ -172,7 +179,7 @@ const Index = () => {
                   className="w-full flex justify-between items-center px-6 py-5 text-left hover:bg-white/5 transition-colors"
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 >
-                  <span className="font-semibold text-white pr-4">{faq.q}</span>
+                  <span className={`font-semibold pr-4 ${faq.isH4 ? "text-white/90" : "text-white"}`}>{faq.q}</span>
                   <Icon
                     name={openFaq === i ? "ChevronUp" : "ChevronDown"}
                     size={20}
@@ -180,7 +187,7 @@ const Index = () => {
                   />
                 </button>
                 {openFaq === i && (
-                  <div className="px-6 pb-5 text-white/70 leading-relaxed border-t border-white/10 pt-4">
+                  <div className="px-6 pb-5 text-white/70 leading-relaxed border-t border-white/5 pt-4">
                     {faq.a}
                   </div>
                 )}
@@ -190,82 +197,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Banner */}
-      <section className="py-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="relative rounded-3xl overflow-hidden">
-            <img src={IMG_CANNON} alt="CTA" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
-            <div className="relative z-10 p-12 text-center">
-              <h2 className="text-4xl lg:text-5xl font-display font-black mb-4 tracking-tighter text-white">
-                Готовы устроить <span className="text-accent">пенный взрыв</span>?
-              </h2>
-              <p className="text-white/70 text-lg mb-8">
-                Звоните — обсудим ваш праздник и подберём оптимальный формат
-              </p>
-              <a
-                href="tel:+79537755111"
-                className="inline-flex items-center gap-3 px-10 py-5 bg-accent text-black font-bold text-xl rounded-full hover:shadow-2xl hover:shadow-accent/50 transition-all"
-              >
-                <Icon name="Phone" size={22} />
-                +7-953-775-51-11
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contacts */}
-      <section id="contacts" className="py-24 px-6 bg-white/5">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-accent text-sm font-medium tracking-widest uppercase">Как с нами связаться</span>
-            <h2 className="text-5xl font-display font-black mt-3 tracking-tighter">
-              Контакты
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 text-center hover:border-accent/40 transition-colors">
-              <div className="w-14 h-14 rounded-2xl bg-accent/20 border border-accent/30 flex items-center justify-center mx-auto mb-4">
-                <Icon name="Phone" size={24} className="text-accent" />
-              </div>
-              <div className="text-white/50 text-sm mb-2">Телефон</div>
-              <a href="tel:+79537755111" className="text-xl font-bold text-white hover:text-accent transition-colors">
-                +7-953-775-51-11
-              </a>
-            </div>
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 text-center hover:border-accent/40 transition-colors">
-              <div className="w-14 h-14 rounded-2xl bg-accent/20 border border-accent/30 flex items-center justify-center mx-auto mb-4">
-                <Icon name="Mail" size={24} className="text-accent" />
-              </div>
-              <div className="text-white/50 text-sm mb-2">Email</div>
-              <a href="mailto:suhininvyacheslav@gmail.com" className="text-base font-semibold text-white hover:text-accent transition-colors break-all">
-                suhininvyacheslav@gmail.com
-              </a>
-            </div>
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 text-center hover:border-accent/40 transition-colors">
-              <div className="w-14 h-14 rounded-2xl bg-accent/20 border border-accent/30 flex items-center justify-center mx-auto mb-4">
-                <Icon name="Clock" size={24} className="text-accent" />
-              </div>
-              <div className="text-white/50 text-sm mb-2">Часы работы</div>
-              <div className="text-xl font-bold text-white">Ежедневно</div>
-              <div className="text-accent font-semibold">09:00 – 23:00</div>
-            </div>
-          </div>
-
-          <div className="mt-8 bg-white/5 border border-white/10 rounded-3xl p-8 text-center">
-            <div className="flex items-center justify-center gap-3 mb-2">
-              <Icon name="MapPin" size={20} className="text-accent" />
-              <span className="text-white/50 text-sm">Адрес</span>
-            </div>
-            <div className="text-lg font-semibold text-white">Россия, Новосибирская область, г. Новосибирск</div>
-            <div className="mt-4 text-white/40 text-sm">ИП Сухинина Т.С. · ИНН 541000739716</div>
-          </div>
-        </div>
-      </section>
-
       <Footer />
-
     </div>
   );
 };
