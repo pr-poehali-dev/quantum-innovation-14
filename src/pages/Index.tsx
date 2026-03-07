@@ -34,9 +34,11 @@ const Index = () => {
               <span className="text-accent text-sm font-medium">Новосибирск · Ежедневно 09:00–23:00</span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-black leading-none mb-6 tracking-tighter">
-              <span className="text-white">ПЕННАЯ ВЕЧЕРИНКА</span>
+              <span className="text-white">ПЕННАЯ</span>
               <br />
-              <span className="text-accent">В НОВОСИБИРСКЕ</span>
+              <span className="text-accent">ВЕЧЕРИНКА</span>
+              <br />
+              <span className="text-white/80">В НОВОСИБИРСКЕ</span>
             </h1>
             <p className="text-xl text-white/80 leading-relaxed mb-10 max-w-lg">
               Пенное шоу, которое взорвёт твой праздник. Для взрослых, детей и гендер-пати в Новосибирске.
@@ -96,7 +98,7 @@ const Index = () => {
                     <div className="w-10 h-10 rounded-xl bg-accent/20 border border-accent/30 flex items-center justify-center">
                       <Icon name={s.icon} size={18} className="text-accent" />
                     </div>
-                    <span className="text-xs text-white/50 font-medium">{s.subtitle}</span>
+                    <h3 className="text-xs text-white/50 font-medium">{s.subtitle}</h3>
                   </div>
                   <h2 className="text-xl font-display font-black mb-3 text-white">{s.title}</h2>
                   <p className="text-white/70 text-sm leading-relaxed">{s.desc}</p>
@@ -179,7 +181,11 @@ const Index = () => {
                   className="w-full flex justify-between items-center px-6 py-5 text-left hover:bg-white/5 transition-colors"
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 >
-                  <span className={`font-semibold pr-4 ${faq.isH4 ? "text-white/90" : "text-white"}`}>{faq.q}</span>
+                  {faq.isH4 ? (
+                    <h4 className="font-semibold pr-4 text-white/90 text-left">{faq.q}</h4>
+                  ) : (
+                    <span className="font-semibold pr-4 text-white">{faq.q}</span>
+                  )}
                   <Icon
                     name={openFaq === i ? "ChevronUp" : "ChevronDown"}
                     size={20}
