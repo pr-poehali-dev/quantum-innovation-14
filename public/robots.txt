@@ -16,4 +16,4 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-Sitemap: https://xn--e1aihercma.xn--p1acf/sitemap.xml
+Sitemap: https://xn----7sbowmcjv.xn--p1ai/sitemap.xml

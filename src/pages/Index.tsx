@@ -33,7 +33,7 @@ const Index = () => {
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
               <span className="text-accent text-sm font-medium">Новосибирск · Ежедневно 09:00–23:00</span>
             </div>
-            <h1 className="text-6xl lg:text-8xl font-display font-black leading-none mb-6 tracking-tighter">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-black leading-none mb-6 tracking-tighter">
               <span className="text-white">ПЕННАЯ ВЕЧЕРИНКА</span>
               <br />
               <span className="text-accent">В НОВОСИБИРСКЕ</span>
